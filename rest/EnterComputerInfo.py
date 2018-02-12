@@ -26,6 +26,7 @@ def get_memory_info():
     memory['free'] = mem.free
     return memory
 
+
 def get_partition_info():
     disk_partition = psutil.disk_partitions()[0]
     partition = {}
@@ -34,6 +35,7 @@ def get_partition_info():
     partition['file system type'] = disk_partition.fstype
     partition['opts'] = disk_partition.opts
     return partition
+
 
 def get_disk_info():
     disk_obj = psutil.disk_usage('/')
@@ -44,18 +46,20 @@ def get_disk_info():
     disk['partition'] = get_partition_info()
     return disk
 
-url = 'http://127.0.0.1:5000/computer_info?pretty=true'
-headers = {
-    'Content-Type' : 'application/json'
-}
 
-data = {
-    'username': getpass.getuser(),
-    'system_info': get_system_info(),
-    'memory': get_memory_info(),
-    'disk': get_disk_info()
-}
-json_data = json.dumps(data)
-response = requests.post(url, headers=headers, data=json_data)
+if __name__ == "__main__":
+    url = 'http://127.0.0.1:5000/computer_info?pretty=true'
+    headers = {
+        'Content-Type' : 'application/json'
+    }
 
-print(response.json())
+    data = {
+        'username': getpass.getuser(),
+        'system_info': get_system_info(),
+        'memory': get_memory_info(),
+        'disk': get_disk_info()
+    }
+    json_data = json.dumps(data)
+    response = requests.post(url, headers=headers, data=json_data)
+
+    print(response.json())
