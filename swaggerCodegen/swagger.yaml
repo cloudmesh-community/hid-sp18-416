@@ -1,0 +1,174 @@
+swagger: '2.0'
+info:
+  description: 'TV Shows, Movies and Music News'
+  version: 1.0.0
+  title: Entertainment Tweetly
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: sossen@iu.edu
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:8080'
+basePath: /api
+schemes:
+  - http
+paths:
+  '/music/{artistName}':
+    get:
+      tags:
+        - Music
+      summary: Find latest tweets related to an artist
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: Returns latest tweets related to an artist
+      operationId: getMusicTweetsByArtist
+      parameters:
+        - name: artistName
+          in: path
+          description: Name of Artist
+          required: true
+          type: string
+          minLength: 3
+          maxLength: 20
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Music'
+        '400':
+          description: Invalid name given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+  '/movies/{movieTitle}':
+    get:
+      tags:
+        - Movies
+      summary: Find latest tweets related to a movie
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: Returns latest tweets related to a movie
+      operationId: getMovieTweetsByTitle
+      parameters:
+        - name: movieTitle
+          in: path
+          description: Title of Movie
+          required: true
+          type: string
+          minLength: 3
+          maxLength: 20
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Movie'
+        '400':
+          description: Invalid title given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+  '/TVShow/{showTitle}':
+    get:
+      tags:
+        - TV Shows
+      summary: Find TV Show by Title
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: Returns latest tweets related to TV show
+      operationId: getTVShowTweetsByTitle
+      parameters:
+        - name: showTitle
+          in: path
+          description: Title of Show
+          required: true
+          type: string
+          minLength: 3
+          maxLength: 20
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/TVShow'
+        '400':
+          description: Invalid title given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Music:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        tweets:
+          $ref: '#/definitions/Tweet'
+  Movie:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        tweets:
+          $ref: '#/definitions/Tweet'
+  TVShow:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        tweets:
+          $ref: '#/definitions/Tweet'
+  Tweet:
+    type: object
+    required:
+      - user
+      - tweet
+      - date
+    properties:
+      user:
+        type: string
+      tweet:
+        type: string
+      retweets:
+        type: integer
+        format: int64
+      official:
+        type: boolean
+      date:
+        type: string
+      likes:
+        type: integer
+        format: int64
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string
