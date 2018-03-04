@@ -7,10 +7,10 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
 1. Create or log in to Twitter Developer Account at [https://apps.twitter.com](https://apps.twitter.com/). 
 2. Create a new Twitter app (Fill in the required information and you can use a dummy value for the ```wesbite``` field such as ```http://dummy.value/```).
 3. Go to the ```Key and Access Token``` tab and generate the following tokens if it is not already available.
- - Consumer Key
- - Consumer Secret
- - Access Token
- - Access Token Secret
+   - Consumer Key
+   - Consumer Secret
+   - Access Token
+   - Access Token Secret
 4. Copy the values generated above in to the file ```credentials.yaml```.
 5. Make sure to have Swagger Codegen (swagger-codegen-cli-2.3.1.jar) downloaded in the ``` ~/swagger/``` folder. If swagger is not installed in the above folder please make sure to update the ```Makefile``` with the correct folder.
 6. Install Python Twitter in the virtual environment you are going to run the service in.
@@ -18,22 +18,22 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
     pip install tweepy
 	```
 7. If you want your swagger server to run on a port other than port ```9550``` which is what I have used by default, please update the following files.
-- ```swagger.yaml``` - host key
-- ```__main.py__``` - port in Line 12
+  - ```swagger.yaml``` - host key
+  - ```__main.py__``` - port in Line 12
 
 
 ## Run and Test the service
 
 1. Invoke the following commands to create and test the service.
- - ```make service```
- - ```make start```
+  - ```make service```
+  - ```make start```
 2. In a different terminal window (within the same or different virtual environment).
-- ```make client```
-- ```make test```
+  - ```make client```
+  - ```make test```
 3. Stop the service.
-- ```make stop```
+  - ```make stop```
 4. Clean all the generated server and client files.
-- ```make clean```
+  - ```make clean```
 
 ## Results
 
