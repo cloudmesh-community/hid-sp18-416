@@ -1,5 +1,7 @@
 # Swagger Codegen
 
+This is the README for the swagger assignment for the **Streams** resource. Please make sure to follow the prerequisites section before creating and invoking the services. 
+
 ## Prerequisites
 
 1. Create or log in to Twitter Developer Account at [https://apps.twitter.com](https://apps.twitter.com/). 
