@@ -44,6 +44,7 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
 - Following are the results from testing the service on 2 invocations using the ```make test``` command. 
 As you can see at the time of the invocation you will be getting the real time tweets of twitter users via **Twitter Streams**.
 
+```
     python InvokeServices.py "The Good Place" "Taylor Swift" "Red Sparrow"
     3 Most Latest Tweets for TV Show: The Good Place
     [{'created_at': 'Sun Mar 04 22:19:10 +0000 2018',
@@ -226,3 +227,4 @@ As you can see at the time of the invocation you will be getting the real time t
                'but I have to take a moment and brag on my kids!! On Thursday, my '
                'theatre…',
       'username': 'RBodoin'}]
+```
