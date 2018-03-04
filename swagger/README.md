@@ -25,15 +25,15 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
 ## Run and Test the service
 
 1. Invoke the following commands to create and test the service.
-  - ```make service```
-  - ```make start```
+   - ```make service```
+   - ```make start```
 2. In a different terminal window (within the same or different virtual environment).
-  - ```make client```
-  - ```make test```
+   - ```make client```
+   - ```make test```
 3. Stop the service.
-  - ```make stop```
+   - ```make stop```
 4. Clean all the generated server and client files.
-  - ```make clean```
+   - ```make clean```
 
 ## Results
 
