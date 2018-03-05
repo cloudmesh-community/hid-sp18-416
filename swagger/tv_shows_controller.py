@@ -97,6 +97,6 @@ def get_tv_show_tweets_by_title(showTitle):  # noqa: E501
                                   "likes_for_original"], twitter_dict[
                                   "created_at"], twitter_dict["official"])
             show_arr.append(tweet_obj)
-        return Music(showTitle, list(show_arr))
+        return TVShow(showTitle, list(show_arr))
     except:
         return Error.message
