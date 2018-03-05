@@ -6,33 +6,12 @@ import json
 import yaml
 from pprint import pprint
 import os
+import ast
 
 from swagger_server.models.error import Error  # noqa: E501
 from swagger_server.models.movie import Movie  # noqa: E501
+from swagger_server.models.tweet import Tweet
 from swagger_server import util
-
-
-class Tweet:
-    id = ""
-    username = ""
-    tweet = ""
-    is_retweet = False
-    retweets_for_original = 0
-    likes_for_original = 0
-    created_at = ""
-    official = False
-
-    def __init__(self, id, username, tweet, is_retweet,
-                 retweets_for_original,
-                 like_for_original, created_at, official):
-        self.id = id
-        self.username = username
-        self.tweet = tweet
-        self.is_retweet = is_retweet
-        self.retweets_for_original = retweets_for_original
-        self.likes_for_original = like_for_original
-        self.created_at = created_at
-        self.official = official
 
 
 class StreamListener(tweepy.StreamListener):
@@ -64,18 +43,8 @@ class StreamListener(tweepy.StreamListener):
                               retweets_for_original, likes_for_original,
                               created_at, official)
 
-            if self.tweet_count == 1:
-                with open('response.json', 'w') as f:
-                    f.write("[")
-
-            with open('response.json', 'a') as f:
-                f.write(str(json.dumps(tweet_obj.__dict__)))
-                if self.tweet_count != self.max_tweet_count:
-                    f.write(",")
-
-            if self.tweet_count == self.max_tweet_count:
-                with open('response.json', 'a') as f:
-                    f.write("]")
+            with open('tweet' + str(self.tweet_count) + '.txt', 'w') as f:
+                f.write(str(tweet_obj))
 
             return True
 
@@ -110,14 +79,24 @@ def get_movie_tweets_by_title(movieTitle):  # noqa: E501
 
     :rtype: Movie
     """
-
     auth = Authentication.authenticate()
 
     twitterStream = Stream(auth, StreamListener())
     twitterStream.filter(track=[movieTitle], languages=["en"])
 
     try:
-        response = json.load(open('response.json'))
-        return response
+        movie_arr = []
+        for i in range(1, (StreamListener.max_tweet_count + 1)):
+            text = open('tweet' + str(i) + '.txt', 'r').read().replace(
+                "\\n", "")
+            twitter_dict = ast.literal_eval(text)
+            tweet_obj = Tweet(twitter_dict["id"], twitter_dict["user"],
+                              twitter_dict["tweet"], twitter_dict[
+                                  "is_retweet"], twitter_dict[
+                                  "retweets_for_original"], twitter_dict[
+                                  "likes_for_original"], twitter_dict[
+                                  "created_at"], twitter_dict["official"])
+            movie_arr.append(tweet_obj)
+        return Movie(movieTitle, list(movie_arr))
     except:
         return Error.message

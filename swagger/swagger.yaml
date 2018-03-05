@@ -112,56 +112,59 @@ paths:
             $ref: '#/definitions/Error'
 definitions:
   Music:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        tweets:
+    type: object
+    properties:
+      name: 
+        type: string
+      tweets:
+        type: array
+        items:
           $ref: '#/definitions/Tweet'
   Movie:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        tweets:
+    type: object
+    properties:
+      name: 
+        type: string
+      tweets:
+        type: array
+        items:
           $ref: '#/definitions/Tweet'
   TVShow:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        tweets:
+    type: object
+    properties:
+      name: 
+        type: string
+      tweets:
+        type: array
+        items:
           $ref: '#/definitions/Tweet'
   Tweet:
     type: object
     required:
+      - id
       - user
       - tweet
-      - date
+      - created_at
     properties:
+      id:
+        type: integer
+        format: int64
       user:
         type: string
       tweet:
         type: string
-      retweets:
+      is_retweet:
+        type: boolean
+      retweets_for_original:
         type: integer
         format: int64
+      likes_for_original:
+        type: integer
+        format: int64
+      created_at:
+        type: string
       official:
         type: boolean
-      date:
-        type: string
-      likes:
-        type: integer
-        format: int64
   Error:
     required:
       - code
