@@ -21,19 +21,34 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
    - ```swagger.yaml``` - host key
    - ```__main.py__``` - port in Line 12
 
+### Prerequisites for running the service as a Docker container
+
+1. Install Docker and have root user access
+2. If you want your swagger server to run on a port other than port ```9550``` which is what I have used by default, please update the following files.
+   - ```swagger.yaml``` - host key
+   - ```__main.py__``` - port in Line 12
+   - ```Makefile``` - PORT variable in Line 2 
+
 
 ## Run and Test the service
 
-1. Invoke the following commands to create and test the service.
+1. Invoke the following commands to create and start the service.
    - ```make service```
    - ```make start```
-2. In a different terminal window (within the same or different virtual environment).
+2. Invoke the following command to test the service, in a different terminal window (within the same or different virtual environment).
    - ```make client```
    - ```make test```
 3. Stop the service.
    - ```make stop```
 4. Clean all the generated server and client files.
    - ```make clean```
+
+### Run the service as a Docker container and Test the service
+1. Invoke the following command to create and start the service container.
+   - ```make container```
+2. Invoke the following command to test the service, in a different terminal window.
+   - ```make client```
+   - ```make test```
 
 ## Results
 

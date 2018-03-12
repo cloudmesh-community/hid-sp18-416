@@ -1,8 +1,9 @@
 SWAGGER_CODEGEN=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
+PORT=9550
 
 service:
 	# Generate Server
-	$(SWAGGER_CODEGEN) generate -i swagger.yaml -l python-flask -o server -D supportPython2=true
+	$(SWAGGER_CODEGEN) generate -i swagger-stream-twitter.yaml -l python-flask -o server -D supportPython2=true
 	# Copy files
 	cp credentials.yaml server/swagger_server/controllers
 	cp movies_controller.py server/swagger_server/controllers
@@ -18,7 +19,7 @@ start:
 
 client:
 	# Generate Client Code
-	$(SWAGGER_CODEGEN) generate -i swagger.yaml -l python -o client -D supportPython2=true
+	$(SWAGGER_CODEGEN) generate -i swagger-stream-twitter.yaml -l python -o client -D supportPython2=true
 	# Install requirements and client side code
 	cd client; pip install -r requirements.txt; python setup.py install
 
@@ -37,5 +38,13 @@ stop:
 	fi;
 	
 clean:
-	rm -r server/
-	rm -r client/
+	if [ -d server ]; then \
+		rm -r server/; \
+	fi;
+	if [ -d client ]; then \
+		rm -r client/; \
+	fi;
+
+container:
+	sudo docker build -t cloudmesh-stream-twitter:v1.0 .
+	sudo docker run -p $(PORT):$(PORT) cloudmesh-stream-twitter:v1.0 
