@@ -1,11 +1,8 @@
 FROM python:3.6
 
 # Update the system, install Python, make, pip, acl and create user
-#RUN apt-get update && apt-get install -y software-properties-common && add-apt-repository ppa:deadsnakes/ppa
-
 RUN apt-get update && \
     apt-get install -q -y default-jre && \
-    #rm -rf /var/lib/apt/lists/* && \
     adduser swagger-user && \
     chown -R swagger-user: /usr/local/ && \
     pip install tweepy
