@@ -12,7 +12,7 @@
 * 03/05 - Swagger Cloud and Big Data Rest Service - Swagger Service 
 * 03/05 - Swagger Cloud and Big Data Rest Service (Phase 2): Makefile  
 * 03/12 - Swagger Cloud and Big Data Rest Service (Phase 3): Docker 
-* 03/20 - Technology paper  
+* 03/19 - Technology paper  
 
 #  Lectures
 
@@ -21,6 +21,7 @@
 * 02/02 - Rest Services with Eve
 * 02/03 - Managing Bibliographies
 * 03/02 - Rest Service Generation with Swagger
+* 03/20 - Cloudmesh Command Shell 
 
 # Meetings
 
