@@ -1,4 +1,5 @@
-broker_url = 'redis://localhost:6379/0' #'pyamqp://' 
+broker_url = 'redis://localhost:6379/0' # for redis
+#broker_url = 'pyamqp://' # for rabbitmq 
 result_backend = 'rpc://'
 result_persistent = True
 task_routes = {
