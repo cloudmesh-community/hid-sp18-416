@@ -1,0 +1,108 @@
+% status: 0
+% chapter: TBD
+
+\title{Big Data Reference Architecture using Python Celery}
+
+
+\author{Sabra Ossen}
+\affiliation{%
+	\institution{Indiana University}
+	\streetaddress{Smith Research Center}
+	\city{Bloomington} 
+	\state{IN} 
+	\postcode{47408}
+	\country{USA}}
+\email{sossen@iu.edu}
+
+\author{Gregor von Laszewski}
+\affiliation{%
+  \institution{Indiana University}
+  \streetaddress{Smith Research Center}
+  \city{Bloomington} 
+  \state{IN} 
+  \postcode{47408}
+  \country{USA}}
+\email{laszewski@gmail.com}
+
+
+% The default list of authors is too long for headers}
+\renewcommand{\shortauthors}{G. v. Laszewski}
+
+
+\begin{abstract}
+The abstract for the project related to the need for a big data reference 
+architecture, building the architecture, the comparison of the deployment in 
+local and cloud environments for K-means machine learning example will be added 
+here. The demonstration of multiple users concurrently using the Swagger REST 
+service which exposes the API to upload input files, execute K-means and get 
+the 
+results will also be added here.
+\end{abstract}
+
+\keywords{hid-sp18-416, Python Celery, Swagger REST services, MongoDB, Spark, 
+Redis}
+
+
+\maketitle
+
+\section{Introduction}
+
+Today, big data is a highly available, crucial and necessary for every domain. 
+Machine learning is the key methodology to analyze the big data obtained from 
+various sources. With the high volume of big data, it becomes a necessity to 
+have a distributed environment to handle the different components such as 
+algorithm execution, storage, and summarization. 
+
+This project aims on building a reference architecture for executing 
+machine learning in a distributed environment. The architecture will be built 
+upon several components such as Python 
+Celery~\cite{hid-sp18-416-www-python-celery}, Swagger 
+REST~\cite{hid-sp18-416-www-swagger}, Redis~\cite{hid-sp18-416-www-redis}, 
+MongoDB~\cite{hid-sp18-416-www-mongodb}, Data Services and 
+Spark~\cite{hid-sp18-416-www-apache-spark}. The main components of the 
+architecture are Python Celery and Swagger REST services. Python Celery allows 
+user-responsive long-running tasks to run in the background using distributed 
+task queues (for example when transferring large files). 
+
+The first phase will focus on implementing the architecture in a local 
+environment and the second phase will focus on implementing it in a cloud 
+environment. The concurrent handling of functions (uploading files, executing 
+the algorithm, etc) for multiple users trying to execute the K-means clustering 
+example will be used for evaluation. A 'Clustering' based dataset (of 
+significant size to showcase the benefit of Python Celery) will be used from 
+the UCI Machine Learning repository~\cite{hid-sp18-416-www-uci-ml-repository}. 
+
+The project goals are listed as follows.
+\begin{enumerate}
+	\item Create a Swagger REST service exposing a set of functions to upload 
+	to (input files) and download from (cluster points and model) a file system 
+	storage exposed via a data service.
+	\item Execute machine learning function (K-means example).
+	\item Implement util functions to get the summary of the clusters/model and 
+	get a status of the job submitted.
+	\item Build the reference architecture in the local and cloud environments.
+	\item Evaluate the system by using large input files and by invoking the 
+	Swagger REST service concurrently for multiple users.
+\end{enumerate}
+
+\section{Literature Review}
+
+\section{Methodology}
+
+\section{Experiment Setup}
+
+\section{Results}
+
+\section{Conclusion}
+
+
+\begin{acks}
+
+  The authors would like to thank Dr.~Gregor~von~Laszewski for his
+  support and suggestions to write this paper.
+
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{report} 
+
