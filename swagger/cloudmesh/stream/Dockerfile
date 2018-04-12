@@ -14,7 +14,7 @@ RUN mkdir ~/files
 # Copy required files
 COPY ["Makefile", "swagger-stream-twitter.yaml", "credentials.yaml", \
       "__main__.py", "movies_controller.py", "music_controller.py", \
-      "tv_shows_controller.py", "stream-requirements.txt", "swagger-codegen-cli-2.3.1.jar", "/home/swagger-user/files/"]
+      "tv_shows_controller.py", "stream-requirements.txt", "swagger-codegen-cli-2.3.1.jar", "download-swagger-codegen.sh", "/home/swagger-user/files/"]
 
 WORKDIR /home/swagger-user/files
 

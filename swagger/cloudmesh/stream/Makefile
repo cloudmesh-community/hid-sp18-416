@@ -2,6 +2,7 @@ SWAGGER_CODEGEN=java -jar swagger-codegen-cli-2.3.1.jar
 PORT=9550
 
 service:
+	sh download-swagger-codegen.sh
 	# Install tweepy
 	pip install -r stream-requirements.txt
 	# Generate Server
@@ -48,6 +49,7 @@ clean:
 	fi;
 
 container:
+	sh download-swagger-codegen.sh
 	sudo docker build -t cloudmesh-stream-twitter:v1.0 .
 	sudo docker run -p $(PORT):$(PORT) cloudmesh-stream-twitter:v1.0 
 
