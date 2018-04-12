@@ -13,11 +13,7 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
    - Access Token Secret
 4. Copy the values generated above in to the file ```credentials.yaml```.
 5. Make sure to have Swagger Codegen (swagger-codegen-cli-2.3.1.jar) downloaded in the ``` ~/swagger/``` folder. If swagger is not installed in the above folder please make sure to update the ```Makefile``` with the correct folder.
-6. Install Python Twitter in the virtual environment you are going to run the service in.
-	```
-    pip install tweepy
-	```
-7. If you want your swagger server to run on a port other than port ```9550``` which is what I have used by default, please update the following files.
+6. If you want your swagger server to run on a port other than port ```9550``` which is what I have used by default, please update the following files.
    - ```swagger.yaml``` - host key
    - ```__main.py__``` - port in Line 12
 
