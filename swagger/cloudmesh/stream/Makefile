@@ -1,4 +1,4 @@
-SWAGGER_CODEGEN=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
+SWAGGER_CODEGEN=java -jar swagger-codegen-cli-2.3.1.jar
 PORT=9550
 
 service:
@@ -27,7 +27,7 @@ client:
 
 test:
 	# Invoke services for 2 instances
-	python InvokeServices.py "The Good Place" "Taylor Swift" "Red Sparrow"
+	python InvokeServices.py "The Good Place" "Taylor Swift" "Jumanji"
 	sleep 1
 	python InvokeServices.py "Game of Thrones" "Carrie Underwood" "Jumanji"
 
@@ -50,3 +50,6 @@ clean:
 container:
 	sudo docker build -t cloudmesh-stream-twitter:v1.0 .
 	sudo docker run -p $(PORT):$(PORT) cloudmesh-stream-twitter:v1.0 
+
+container-stop:
+	sudo docker stop $$(sudo docker ps -a -q)

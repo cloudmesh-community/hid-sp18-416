@@ -4,20 +4,17 @@ FROM python:3.6
 RUN apt-get update && \
     apt-get install -q -y default-jre && \
     adduser swagger-user && \
-    chown -R swagger-user: /usr/local/ && \
-    pip install tweepy
+    chown -R swagger-user: /usr/local/
 
 # Switch user to swagger user 
 USER swagger-user
-# Download Swagger-Codegen jar
-RUN mkdir ~/swagger && \
-    mkdir ~/files && \
-    wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -P ~/swagger
+# Create folder for files
+RUN mkdir ~/files
 
 # Copy required files
 COPY ["Makefile", "swagger-stream-twitter.yaml", "credentials.yaml", \
       "__main__.py", "movies_controller.py", "music_controller.py", \
-      "tv_shows_controller.py", "/home/swagger-user/files/"]
+      "tv_shows_controller.py", "stream-requirements.txt", "swagger-codegen-cli-2.3.1.jar", "/home/swagger-user/files/"]
 
 WORKDIR /home/swagger-user/files
 
