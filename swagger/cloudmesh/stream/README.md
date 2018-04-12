@@ -11,7 +11,7 @@ This is the README for the swagger assignment for the **Streams** resource. Plea
    - Consumer Secret
    - Access Token
    - Access Token Secret
-4. Copy the values generated above in to the file ```credentials.yaml``` which is in the ```cloudmesh/stream/``` folder.
+4. Copy the values generated above in to the file ```credentials.yaml``` which is in the ```swagger/cloudmesh/stream/``` folder.
 5. If you want your swagger server to run on a port other than port ```9550``` which is what I have used by default, please update the following files.
    - ```swagger.yaml``` - host key
    - ```__main.py__``` - port in Line 12
