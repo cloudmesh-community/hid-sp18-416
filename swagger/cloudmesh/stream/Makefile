@@ -2,6 +2,8 @@ SWAGGER_CODEGEN=java -jar ~/swagger/swagger-codegen-cli-2.3.1.jar
 PORT=9550
 
 service:
+	# Install tweepy
+	pip install -r stream-requirements.txt
 	# Generate Server
 	$(SWAGGER_CODEGEN) generate -i swagger-stream-twitter.yaml -l python-flask -o server -D supportPython2=true
 	# Copy files
