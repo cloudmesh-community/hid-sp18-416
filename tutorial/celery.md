@@ -3,7 +3,7 @@
 
 ## Overview
 
-[abstract goes here]
+Celery is an asynchronous task queue which is based upon distributed message passing and uses RabbitMQ or Redis as the communication system. The smallest unit of execution in Python Celery is a task, which can be used to execute either long running or quick tasks. Celery also provides the flexibility to execute tasks synchronously and asynchronously. With the support of Eventlet and gevent, Celery also has the capability to execute tasks concurrently in one or more server/worker nodes. Celery can be understood as a tool that encompasses many communication systems, abstractions, scheduling and real time operation handling capabilities. Celery also provides support for a wide array of configuration options such as task timeouts, retries and task distribution. Celery is a easy to use, highly configurable, flexible and fast tool that can be used to handle a very large amount of tasks of varying nature. 
 
 In this tutorial the capabilities of Python Celery, the Python distributed task queue will be shared. The tutorial is separated into two sections. 
 
@@ -22,6 +22,8 @@ If you want to have a quick look at the Docker containers and the invocation of 
 ## Resources
 
 http://docs.celeryproject.org/en/latest/
+
+https://www.vinta.com.br/blog/2017/celery-overview-archtecture-and-how-it-works/
 
 https://docs.docker.com/install/#supported-platforms
 
@@ -304,7 +306,6 @@ For a more thorough installation guide for Docker Compose please check the offic
 
 Each module ( [add](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/add), [factorial](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/factorial) and [matrix multiplication](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/mat_mul) ) above is defined in a dedicted package structure. Following is the directory structure of the ```add module```, which you can also find [here](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/add).
 
-
 ```
 ├── add
 │   ├── add_module.py
@@ -413,7 +414,6 @@ Both modules ```mat_mul``` and ```factorial``` have a similar directory structur
 ### Calling Tasks
 
 Following is the folder structure for creating the containers to invoke the long running/quick tasks.
-
 
 ```
 ├── call_add_module.py
