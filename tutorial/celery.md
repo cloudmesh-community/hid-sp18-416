@@ -11,13 +11,13 @@ The first section of the tutorial will describe about the **basic usage of Pytho
 
 You can find the links for the tutorial structures below.
 
-This tutorial provides an overview of the structure for installing and running Python Celery in a Linux environment.
+This tutorial shows you how to install and run Python Celery in a Linux environment.
 
-[Basic Tutorial](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/basic_tutorial)
+[Basic Tutorial](#basic-tutorial)
 
 If you want to have a quick look at the Docker containers and the invocation of tasks make sure to have Docker and Docker Compose installed beforehand and then invoke the make commands [here](https://github.com/cloudmesh-community/hid-sp18-416/blob/master/tutorial/python_celery/docker_tutorial/Makefile). You can also check the ```Docker Tutorial``` section at the bottom to understand it thoroughly.
 
-[Docker Tutorial](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial)
+[Docker Tutorial](#docker-tutorial)
 
 ## Resources
 
