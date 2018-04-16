@@ -304,12 +304,15 @@ For a more thorough installation guide for Docker Compose please check the offic
 
 Each module ( [add](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/add), [factorial](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/factorial) and [matrix multiplication](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/mat_mul) ) above is defined in a dedicted package structure. Following is the directory structure of the ```add module```, which you can also find [here](https://github.com/cloudmesh-community/hid-sp18-416/tree/master/tutorial/python_celery/docker_tutorial/add).
 
+
+```
 ├── add
 │   ├── add_module.py
 │   ├── celeryconfig.py
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   └── run-add-worker.sh
+```
 
 In the following sub sections I will describe about each of the files in the package.
 
@@ -411,6 +414,8 @@ Both modules ```mat_mul``` and ```factorial``` have a similar directory structur
 
 Following is the folder structure for creating the containers to invoke the long running/quick tasks.
 
+
+```
 ├── call_add_module.py
 ├── call_add_module.sh
 ├── call_factorial_module.py
@@ -422,6 +427,7 @@ Following is the folder structure for creating the containers to invoke the long
 ├── Dockerfile
 ├── Makefile
 └── requirements.txt
+```
 
 I will describe about the files necessary to invoke the add task. The content and structure is similar to the matrix multiplicaion and factorial tasks.
 
