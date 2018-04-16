@@ -1,0 +1,80 @@
+version: '2'
+
+services:
+  redis:
+    image: 'redis:3.0-alpine'
+    command: redis-server --requirepass devpassword
+    hostname: redis
+    volumes:
+      - 'redis:/var/lib/redis/data'
+    ports:
+      - '6379:6379'
+
+  celery-add-worker:
+    build:
+      context: add
+      dockerfile: Dockerfile
+    command: ./run-add-worker.sh
+    depends_on:
+      - redis
+    links:
+      - redis
+
+  celery-factorial-worker:
+    build:
+      context: factorial
+      dockerfile: Dockerfile
+    command: ./run-factorial-worker.sh
+    depends_on:
+      - redis
+    links:
+      - redis
+
+  celery-mat-mul-worker:
+    build:
+      context: mat_mul
+      dockerfile: Dockerfile
+    command: ./run-mat-mul-worker.sh
+    depends_on:
+      - redis
+    links:
+      - redis
+
+  call-add-module:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ./call_add_module.sh
+    depends_on:
+      - celery-add-worker
+      - redis
+    links:
+      - celery-add-worker
+      - redis
+
+  call-mat-mul-module:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ./call_mat_mul_module.sh
+    depends_on:
+      - redis
+      - celery-mat-mul-worker
+    links:
+      - redis
+      - celery-mat-mul-worker
+
+  call-factorial-module:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ./call_factorial_module.sh
+    depends_on:
+      - redis
+      - celery-factorial-worker
+    links:
+      - redis
+      - celery-factorial-worker
+
+volumes:
+  redis:
