@@ -2,6 +2,8 @@
 
 This is the README for the swagger assignment for the **Streams** resource. Please make sure to follow the prerequisites section before creating and invoking the services. 
 
+You can find the videos for creating and testing the swagger service at https://drive.google.com/file/d/1xYDsgXwoC21pnfuj4tI7mqenYq6LQWrV/view?usp=sharing.
+
 ## Prerequisites
 
 1. Create or log in to Twitter Developer Account at [https://apps.twitter.com](https://apps.twitter.com/). 
