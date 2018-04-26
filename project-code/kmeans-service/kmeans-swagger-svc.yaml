@@ -1,0 +1,210 @@
+swagger: '2.0'
+info:
+  description: 'Swagger REST Service to Expose KMeans as a Functionality'
+  version: 1.0.0
+  title: KMeans Data Service
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: sossen@iu.edu
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:9550'
+basePath: /kmeans
+schemes:
+  - http
+paths:
+  '/saveInputFile':
+    post:
+      tags:
+        - Save Input File 
+      summary: Save Input File to HDFS
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: Given an username, job number and input file name save the input file in hdfs
+      operationId: save_input_file
+      parameters:
+        - name: username
+          in: query
+          description: name of user invoking service
+          required: true
+          type: string
+        - name: jobNum
+          in: query
+          description: job number
+          required: true
+          type: string
+        - name: fileName
+          in: query
+          description: Name of Input File
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+        '400':
+          description: Invalid name given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+  '/getKMeansModel':
+    get:
+      tags:
+        - Retrieve KMeans Model 
+      summary: Retrieve model file from HDFS
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: get kmeans model (txt) file
+      operationId: get_kmeans_model
+      parameters:
+        - name: username
+          in: query
+          description: name of user invoking service
+          required: true
+          type: string
+        - name: jobNum
+          in: query
+          description: job number
+          required: true
+          type: string
+        - name: fileName
+          in: query
+          description: Name of Model File
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+        '400':
+          description: Invalid name given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+  '/executeKMeans':
+    post:
+      tags:
+        - Execute KMeans 
+      summary: Execute KMeans function in Spark
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: Execute KMeans in Spark
+      operationId: execute_kmeans
+      parameters:
+        - name: k
+          in: query
+          description: Number of Clusters
+          required: true
+          type: integer
+        - name: username
+          in: query
+          description: Name of user executing KMeans
+          required: true
+          type: string
+        - name: jobNum
+          in: query
+          description: Job number of user executing KMeans
+          required: true
+          type: string
+        - name: prediction_file_name
+          in: query
+          description: Name of Prediction File
+          required: true
+          type: string
+        - name: model_file_name
+          in: query
+          description: Name of Model File
+          required: true
+          type: string
+        - name: input_file_name
+          in: query
+          description: Name of Input File
+          required: true
+          type: string
+        - name: features_col
+          in: query
+          description: array having feature names
+          required: true
+          type: array
+          collectionFormat: csv
+          items:
+            type : string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+        '400':
+          description: Invalid name given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+  '/getPredictions':
+    get:
+      tags:
+        - Retrieve Predictions for Input Data 
+      summary: Retrieve model file from HDFS
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      description: get predictions (txt) file
+      operationId: get_predictions
+      parameters:
+        - name: username
+          in: query
+          description: name of user invoking service
+          required: true
+          type: string
+        - name: jobNum
+          in: query
+          description: job number
+          required: true
+          type: string
+        - name: fileName
+          in: query
+          description: Name of Prediction File
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+        '400':
+          description: Invalid name given
+          schema:
+            type: string
+        default:
+          description: Unexpected error occurred
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string

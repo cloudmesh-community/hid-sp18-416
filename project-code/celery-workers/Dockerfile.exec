@@ -1,0 +1,27 @@
+FROM python:3.6
+
+ENV C_FORCE_ROOT="true"
+
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+	add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" && \
+	apt-get update && \
+	apt-get install -q -y oracle-java8-installer
+
+ARG SPARK_TAR_FILE=http://mirror.metrocast.net/apache/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz
+ENV SPARK_HOME /usr/local/spark-2.3.0-bin-hadoop2.7
+ 
+ENV PATH $PATH:${SPARK_HOME}/bin
+RUN curl -s ${SPARK_TAR_FILE} | tar -xz -C /usr/local/
+
+COPY exec-requirements.txt exec-requirements.txt
+
+RUN pip install -r exec-requirements.txt && \
+    mkdir /home/user_data/
+
+COPY . /home/celeryworker/
+
+WORKDIR /home/celeryworker
+
+EXPOSE 7085

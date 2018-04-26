@@ -1,0 +1,6 @@
+redis==2.10.6
+celery==4.1.0
+numpy>=1.14.2
+hdfs>=2.1.0
+py4j>=0.10.5
+pyspark==2.3.0

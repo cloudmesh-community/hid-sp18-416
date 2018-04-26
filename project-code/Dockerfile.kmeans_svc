@@ -1,0 +1,24 @@
+FROM python:3.6
+
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+	add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" && \
+	apt-get update && \
+	apt-get install -q -y oracle-java8-installer
+
+# Create folder for files
+RUN mkdir ~/files
+
+COPY . files/
+
+RUN cd files/kmeans-service && \
+    pip install -r kmeans-svc-requirements.txt
+
+ENV PYTHONPATH="/files/celery-workers":$PYTHONPATH 
+WORKDIR files/kmeans-service/
+
+RUN make service
+EXPOSE 9550
+
+CMD ["make", "start"]

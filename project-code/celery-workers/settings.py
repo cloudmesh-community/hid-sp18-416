@@ -1,0 +1,5 @@
+CELERY_CONFIG_FILE_NAME = "celeryconfig"
+FILE_STORAGE_ROOT_PATH = "../user_data/"
+FILE_STORAGE_VOL_PATH = "../data/"
+HDFS_CLIENT_ENVIRONMENT = "dev"
+HDFS_FILE_ROOT_PATH = "hdfs://hadoop:9010/"
