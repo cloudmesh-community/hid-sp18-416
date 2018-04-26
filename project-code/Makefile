@@ -1,4 +1,5 @@
 docker_compose_build:
+	mkdir data
 	sh download-data.sh
 	sudo docker-compose up --build
 
