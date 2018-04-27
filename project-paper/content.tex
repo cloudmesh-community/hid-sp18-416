@@ -30,16 +30,18 @@
 
 
 \begin{abstract}
-The abstract for the project related to the need for a big data reference 
-architecture, building the architecture, the comparison of the deployment in 
-local and cloud environments for K-means machine learning example will be added 
-here. The demonstration of multiple users concurrently using the Swagger REST 
-service which exposes the API to upload input files, execute K-means and get 
-the 
-results will also be added here.
+Distributed Big Data reference architectures are of great importance. 
+With the use of Python Celery this project focuses on building such a 
+distributed Big Data reference architecture. The main goal of the project is 
+to identify the key requirements for the domain and build the components of 
+the system. K-means is a widely known clustering algorithm that can be used 
+for a huge amount of data sets. Therefore, the use case for this project 
+is built around executing the K-means algorithm. The environment is also 
+built on three environments; local, distributed cloud and multi docker 
+container environments.
 \end{abstract}
 
-\keywords{hid-sp18-416, Python Celery, Swagger REST services, MongoDB, Spark, 
+\keywords{hid-sp18-416, Python Celery, Swagger REST services, Node JS, Spark, 
 Redis}
 
 
@@ -58,43 +60,106 @@ machine learning in a distributed environment. The architecture will be built
 upon several components such as Python 
 Celery~\cite{hid-sp18-416-www-python-celery}, Swagger 
 REST~\cite{hid-sp18-416-www-swagger}, Redis~\cite{hid-sp18-416-www-redis}, 
-MongoDB~\cite{hid-sp18-416-www-mongodb}, Data Services and 
+Apache Hadoop~\cite{hid-sp18-416-www-apache-hadoop}, 
+Node JS~\cite{hid-sp18-416-www-nodejs} and 
 Spark~\cite{hid-sp18-416-www-apache-spark}. The main components of the 
 architecture are Python Celery and Swagger REST services. Python Celery allows 
 user-responsive long-running tasks to run in the background using distributed 
-task queues (for example when transferring large files). 
+task queues. 
 
 The first phase will focus on implementing the architecture in a local 
 environment and the second phase will focus on implementing it in a cloud 
-environment. The concurrent handling of functions (uploading files, executing 
-the algorithm, etc) for multiple users trying to execute the K-means clustering 
-example will be used for evaluation. A `Clustering' based dataset (of 
-significant size to showcase the benefit of Python Celery) will be used from 
-the UCI Machine Learning repository~\cite{hid-sp18-416-www-uci-ml-repository}. 
+environment. Amazon Elastic Compute Cloud (EC2) 
+instances~\cite{hid-sp18-416-www-amazon-ec2} and 
+Amazon Elastic File System (EFS)~\cite{hid-sp18-416-www-amazon-efs} will be 
+used to build the distributed cloud environment. The third 
+phase focuses on implementing a multi docker container environment for the 
+distributed architecture using Docker~\cite{hid-sp18-416-www-docker} and 
+Docker Compose~\cite{hid-sp18-416-www-docker-compose}. Two `Clustering' based 
+datasets from the UCI Machine Learning 
+repository~\cite{hid-sp18-416-www-uci-ml-repository} will be used for 
+evaluation of the distributed architecture. 
 
 The project goals are listed as follows.
 \begin{enumerate}
-	\item Create a Swagger REST service exposing a set of functions to upload 
-	to (input files) and download from (cluster points and model) a file system 
-	storage exposed via a data service.
-	\item Execute machine learning function (K-means example).
-	\item Implement util functions to get the summary of the clusters/model and 
-	get a status of the job submitted.
-	\item Build the reference architecture in the local and cloud environments.
-	\item Evaluate the system by using large input files and by invoking the 
-	Swagger REST service concurrently for multiple users.
+	\item Create a Node JS Server exposing the set of functions to upload 
+	to (input files) and download from (predictions and model files) in a 
+	Hadoop Distributed File System (HDFS)~\cite{hid-sp18-416-www-ibm-hdfs}
+	\item Execute machine learning function (K-means example) using Apache 
+	Spark~\cite{hid-sp18-416-www-apache-spark}.
+	\item Expose the tasks supported by the distributed Python 
+	celery~\cite{hid-sp18-416-www-python-celery} workers through a Swagger REST 
+	service~\cite{hid-sp18-416-www-swagger}
+	\item Build the reference architecture in the local, cloud and docker 
+	environments.
+	\item Provide a thorough guide on building distributed Big Data analysis 
+	environments.	
 \end{enumerate}
 
-\section{Literature Review}
+\section{Project Procedure}
 
-\section{Methodology}
+This section focuses on providing guidance for building the distributed 
+reference architecture for big data problems. The first subsection which is on 
+building the environment is further divided into three sections each 
+explaining the specific environments used, procedures and problems faced in 
+that specific environment. The second subsection focuses on defining the 
+format of the data that needs to be given to the service.   
 
-\section{Experiment Setup}
+\subsection{Building the Environment}
+
+\subsubsection{Local Environment}
+
+\subsubsection{Distributed Cloud Environment}
+
+\subsubsection{Multi Docker Container Environment}
+
+\subsection{Data Format}
+
+\section{Technology Usage}
+
+\subsection{Python Celery}
+
+Celery is an asynchronous task queue which is based upon distributed message 
+passing and uses RabbitMQ or Redis as the communication system. The smallest 
+unit of execution in Python Celery is a task, which can be used to execute 
+either long running or quick tasks. Celery also provides the flexibility to 
+execute tasks synchronously and asynchronously. With the support of Eventlet 
+and gevent, Celery also has the capability to execute tasks concurrently in 
+one or more server/worker nodes~\cite{hid-sp18-416-www-python-celery}. Celery 
+can be understood as a tool that encompasses many communication systems, 
+abstractions, scheduling and real time operation handling capabilities. Celery 
+also provides support for a wide array of configuration options such as task 
+timeouts, retries and task distribution. Celery is a easy to use, highly 
+configurable, flexible and fast tool that can be used to handle a very large 
+amount of tasks of varying nature~\cite{hid-sp18-416-www-vinta-celery-blog}.
+
+\subsection{Node JS}
+
+Node JS is a widely used platform supporting server side JavaScript execution. 
+Node JS greatly simplifies the development and maintenance of web applications 
+and it also has an event driven architecture. This architecture design 
+provides high scalability, high throughput and support for real time 
+applications~\cite{hid-sp18-416-www-nodejs-wikipedia}.  
+
+\subsection{Hadoop}
+
+\subsection{Spark}
+
+\subsection{Swagger Codegen}
+
+\subsection{Amazon EC2}
+
+\subsection{Amazon EFS}
+
+\subsection{Docker Compose}
 
 \section{Results}
 
+\section{Performance Comparison}
+
 \section{Conclusion}
 
+\section{Future Work}
 
 \begin{acks}
 
