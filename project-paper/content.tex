@@ -34,15 +34,15 @@ Distributed Big Data reference architectures are of great importance.
 With the use of Python Celery this project focuses on building such a 
 distributed Big Data reference architecture. The main goal of the project is 
 to identify the key requirements for the domain and build the components of 
-the system. K-means is a widely known clustering algorithm that can be used 
-for a huge amount of data sets. Therefore, the use case for this project 
+the system. K-means is a widely known clustering algorithm that is used 
+on a huge amount of data sets. Therefore, the use case for this project 
 is built around executing the K-means algorithm. The environment is also 
-built on three environments; local, distributed cloud and multi docker 
-container environments.
+built on three environments; local, distributed cloud and multi-container 
+Docker environments.
 \end{abstract}
 
 \keywords{hid-sp18-416, Python Celery, Swagger REST services, Node JS, Spark, 
-Redis}
+Hadoop}
 
 
 \maketitle
@@ -73,7 +73,7 @@ environment. Amazon Elastic Compute Cloud (EC2)
 instances~\cite{hid-sp18-416-www-amazon-ec2} and 
 Amazon Elastic File System (EFS)~\cite{hid-sp18-416-www-amazon-efs} will be 
 used to build the distributed cloud environment. The third 
-phase focuses on implementing a multi docker container environment for the 
+phase focuses on implementing a multi-container Docker environment for the 
 distributed architecture using Docker~\cite{hid-sp18-416-www-docker} and 
 Docker Compose~\cite{hid-sp18-416-www-docker-compose}. Two `Clustering' based 
 datasets from the UCI Machine Learning 
@@ -117,41 +117,110 @@ format of the data that needs to be given to the service.
 
 \section{Technology Usage}
 
+This section focuses on providing an overview of the many tools used in this 
+project. The key tool supporting the distributed architecture is Python 
+Celery~\cite{hid-sp18-416-www-python-celery} which is an asynchronous task 
+queue based on distributed message passing. Node 
+JS~\cite{hid-sp18-416-www-nodejs} and Swagger 
+Codegen~\cite{hid-sp18-416-www-swagger-codegen} have also been used to build 
+REST services exposing the file system and celery workers. Further explanation 
+on tools and technologies used for building different architectures on 
+different platforms is also given.
+
 \subsection{Python Celery}
 
 Celery is an asynchronous task queue which is based upon distributed message 
 passing and uses RabbitMQ or Redis as the communication system. The smallest 
 unit of execution in Python Celery is a task, which can be used to execute 
 either long running or quick tasks. Celery also provides the flexibility to 
-execute tasks synchronously and asynchronously. With the support of Eventlet 
-and gevent, Celery also has the capability to execute tasks concurrently in 
-one or more server/worker nodes~\cite{hid-sp18-416-www-python-celery}. Celery 
+execute tasks synchronously and 
+asynchronously~\cite{hid-sp18-416-www-python-celery}. Celery 
 can be understood as a tool that encompasses many communication systems, 
 abstractions, scheduling and real time operation handling capabilities. Celery 
-also provides support for a wide array of configuration options such as task 
-timeouts, retries and task distribution. Celery is a easy to use, highly 
-configurable, flexible and fast tool that can be used to handle a very large 
-amount of tasks of varying nature~\cite{hid-sp18-416-www-vinta-celery-blog}.
+is a easy to use, highly configurable, flexible and fast tool that can be used 
+to handle a very large amount of tasks of varying 
+nature~\cite{hid-sp18-416-www-vinta-celery-blog}.
 
 \subsection{Node JS}
 
 Node JS is a widely used platform supporting server side JavaScript execution. 
 Node JS greatly simplifies the development and maintenance of web applications 
-and it also has an event driven architecture. This architecture design 
+and has an event driven architecture. This architecture design 
 provides high scalability, high throughput and support for real time 
-applications~\cite{hid-sp18-416-www-nodejs-wikipedia}.  
-
-\subsection{Hadoop}
-
-\subsection{Spark}
+applications~\cite{hid-sp18-416-www-nodejs-wikipedia}. Node JS is most popular 
+to create single page web and IOT applications, APIs and mobile 
+backends~\cite{hid-sp18-416-www-nodejs-blog}. 
 
 \subsection{Swagger Codegen}
 
+Swagger Codegen is an open source tool that provides ease of development for 
+REST API developers by means of creating server stubs and client SDKs using 
+the given OPENAPI specification. It can be categorized as a automatic API code 
+generation tool. This allows developers to focus more on the API 
+specification and not the service generation. Swagger Codegen also has the 
+capability to generate client SDKs in many different languages including 
+Python~\cite{hid-sp18-416-www-swagger-codegen}. This is a key point to use 
+Swagger Codegen generated REST services to expose the tasks of the Python 
+Celery workers. 
+
+\subsection{Hadoop}
+
+Apache Hadoop is an open source platform that supports processing very large 
+data sets. The complete Hadoop eco system is targeted towards distributing the 
+Big Data in the HDFS and then deploying the application or solver in each of 
+the nodes in the cluster. Hadoop targets to achieve batch processing with the 
+use of the MapReduce programming model and the 
+HDFS~\cite{hid-sp18-416-www-apache-hadoop}. The main goal of Hadoop is to 
+provide scalability, fault tolerance, flexibility and performance for batch 
+processing applications. Due to the support for structured and unstructured 
+data Hadoop allows organizations to quickly leverage large datasets and 
+perform analysis on them~\cite{hid-sp18-416-www-hadoop-hortonworks-blog}.
+
+\subsection{Spark}
+
+Apache Spark is an in-memory data processing engine that is based on a 
+resilient distributed dataset (RDD) architecture. Spark requires cluster 
+management and a distributed file system in order to function. For a 
+distributed architecture, Spark is capable of interfacing with HDFS and Hadoop 
+Yarn~\cite{hid-sp18-416-www-spark-wikipedia}. Spark contains a distributed 
+core engine which is responsible for execution of tasks and libraries which 
+provide many different user APIs from different languages and streaming 
+support. Spark also has a machine learning library called `MLlib' with a wide 
+variety of machine learning algorithms used in the data science 
+domain~\cite{hid-sp18-416-www-spark-hortonworks-blog}.
+
 \subsection{Amazon EC2}
+
+Amazons' Elastic Compute Cloud (EC2) is the most famous Infrastructure as a 
+Service now. Amazon EC2 provides users the pay only for the computing 
+resources they consume. This provides great flexibility and is economically 
+attractive to the user. With autoscaling, EC2 also provides reliability for 
+the user applications. Amongst other benefits are high end security and full 
+integration for other Amazon services such as Amazon 
+EFS~\cite{hid-sp18-416-www-amazon-ec2}. 
 
 \subsection{Amazon EFS}
 
+Amazons' Elastic File System (EFS) is a scalable file system storage provided 
+by Amazon. This easily integrates with existing Amazon EC2 instances and can 
+be purchased only as much as it is used. EFS supports high availability and 
+scalability in its shared file system. The main attraction points for Amazon 
+EFS is its simplicity and integration with either on premise or cloud 
+instances. There are several uses cases such as web service hosting, content 
+management and Big Data analytics for Amazon 
+EFS~\cite{hid-sp18-416-www-amazon-efs}. 
+
 \subsection{Docker Compose}
+
+Docker Compose is a tool that is used to create multi-container Docker 
+applications. Docker compose provides the capability to define and run 
+multiple Docker containers with ease. It also provides easy integration of 
+volumes and networking between multiple docker containers. With YAML as the 
+configuration file to define the multiple services Docker Compose only focuses 
+on the build, start and stop of the multiple containers at the same time. 
+Individual operations on each Docker image or container is irrelevant to 
+Docker Compose and it only focuses on the orchestration of the environment as 
+a whole~\cite{hid-sp18-416-www-docker-compose-blog}. 
 
 \section{Results}
 
