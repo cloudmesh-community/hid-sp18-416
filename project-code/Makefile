@@ -1,6 +1,9 @@
 docker_compose_build:
-	mkdir data
+	if [ ! -d data ]; then \
+		mkdir data; \
+	fi;
 	sh download-data.sh
+	wget https://oss.sonatype.org/content/repositories/releases/io/swagger/swagger-codegen-cli/2.3.1/swagger-codegen-cli-2.3.1.jar -P kmeans-service/
 	sudo docker-compose up --build
 
 docker_compose_start:

@@ -2,7 +2,6 @@ SWAGGER_CODEGEN=java -jar swagger-codegen-cli-2.3.1.jar
 PORT=9550
 
 service:
-	sh download-swagger-codegen.sh
 	pip install -r kmeans-svc-requirements.txt
 	# Generate Server
 	$(SWAGGER_CODEGEN) generate -i kmeans-swagger-svc.yaml -l python-flask -o server -D supportPython2=true
