@@ -367,12 +367,14 @@ storage worker and Node JS server.
 
 K-means can only be executed on numeric data. Therefore a pre-defined format 
 in which the data should be given to the system is described here. 
-Table~\ref{tab:dataformatexample} shows the format of the data. The first 
-column should contain the id by which we can identify the row. Consequently 
-the other columns should contain the numeric feature data. The column names 
-should be given as the first row of the dataset. This input data file may 
-contain `na' values as the Celery executor worker performs removal of `na' 
-values from the dataset.
+Table~\ref{tab:dataformatexample} shows the format of the data for the first 
+three rows. The first column should contain the id by which we can identify 
+the row. Consequently the other columns should contain the numeric feature 
+data, make sure to only enter numeric data as the values will be cast to a 
+`double'. The column names should be given as the first row of the dataset. 
+This input data file may contain `na' values as the Celery executor worker 
+performs removal of `na' values from the dataset. Please note that the column 
+names should only contain `\_' as a separator.
 
 \begin{table}[htbp]
 \caption{Iris Data Set Representation 
@@ -380,7 +382,8 @@ values from the dataset.
 	\centering
 	\begin{tabular}{*{5}{c}}
 		\toprule
-		id   & w   & x   & y   & z   \\
+		id   & sepal\_length   & sepal\_width  & petal\_length   & 
+		petal\_width   \\
 		\midrule
 		row0 & 5.1 & 3.5 & 1.4 & 0.2 \\
 		row1 & 4.9 & 3   & 1.4 & 0.2 \\
@@ -388,6 +391,42 @@ values from the dataset.
 		\bottomrule
 	\end{tabular}
 \end{table}
+
+Figure~\ref{fig:irisinputdata} shows the classification for each of the 
+flower types `Iris Setosa', `Iris Versicolor' and `Iris Virginica' against the 
+Sepal\_Length and Sepal\_Width.
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.8\columnwidth]{images/irisinputdata.png}
+	\caption{Iris Input Data Set Classification}
+\label{fig:irisinputdata} 
+\end{figure}
+
+\subsection{Expected Results}
+
+The user can execute the K-means function with input data in the format 
+described in Section~\ref{sec:dataformat}. The following files will be 
+generated as output from the system.
+
+\begin{description}
+	\item[Model File] containing the cluster centers will be saved in HDFS.
+	\item[Predictions File] for the input data is 
+	generated such that each input data point is assigned to the cluster to 
+	which it is nearest is also saved in HDFS.
+\end{description}
+
+Figure~\ref{fig:irispredictions} shows the predictions obtained after 
+executing the K-means function. When comparing the predictions obtained from 
+the system after executing K-means and the original classifications it can be 
+seen that the system produces accurate results.
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.8\columnwidth]{images/irispredictions.png}
+	\caption{Predictions for Iris Data Set}
+\label{fig:irispredictions} 
+\end{figure}
 
 \section{Results}
 
