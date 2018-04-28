@@ -362,9 +362,32 @@ storage worker and Node JS server.
 \label{fig:multicontainerdocker} 
 \end{figure}
 
-
 \subsection{Data Format}
 \label{sec:dataformat}
+
+K-means can only be executed on numeric data. Therefore a pre-defined format 
+in which the data should be given to the system is described here. 
+Table~\ref{tab:dataformatexample} shows the format of the data. The first 
+column should contain the id by which we can identify the row. Consequently 
+the other columns should contain the numeric feature data. The column names 
+should be given as the first row of the dataset. This input data file may 
+contain `na' values as the Celery executor worker performs removal of `na' 
+values from the dataset.
+
+\begin{table}[htbp]
+\caption{Iris Data Set Representation 
+	Example~\cite{hid-sp18-416-www-iris-dataset}}\label{tab:dataformatexample}
+	\centering
+	\begin{tabular}{*{5}{c}}
+		\toprule
+		id   & w   & x   & y   & z   \\
+		\midrule
+		row0 & 5.1 & 3.5 & 1.4 & 0.2 \\
+		row1 & 4.9 & 3   & 1.4 & 0.2 \\
+		row2 & 4.7 & 3.2 & 1.3 & 0.2 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \section{Results}
 
