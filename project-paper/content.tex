@@ -202,6 +202,43 @@ on the build, start and stop of the multiple containers at the same time.
 Individual operations on each Docker image or container is irrelevant to 
 Docker Compose and it only focuses on the orchestration of the environment as 
 a whole~\cite{hid-sp18-416-www-docker-compose-blog}. 
+	
+\subsection{Versions of the Technologies Used}
+
+Table~\ref{tbl:technologyversions} displays the versions used for each 
+technology when creating the Reference Architecture. Please note that you have 
+to use the Apache Spark version which is built using the Hadoop version in 
+your Hadoop deployment. Also make sure to use the pyspark, py4j versions which 
+are compatible with your Apache Spark version. 
+
+\begin{table}[htbp]
+	\centering
+	\caption{Versions of Technologies Used}\label{tbl:technologyversions}
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Technology & Version \\
+		\midrule
+		Python & 3.6   \\
+		Redis & 2.10.6  \\
+		Celery & 4.1.0 \\
+		hdfs (HDFS CLI) & 2.1.0 \\
+		py4j & 0.10.6 \\
+		numpy & 1.14.2  \\
+		scipy & 0.18.1  \\
+		pandas & 0.19.2  \\
+		pyspark & 2.3.0   \\
+		java & Oracle java 8 \\
+		Apache Spark & 2.3.0 \\
+		Hadoop Version used & 2.7 \\
+		in Apache Spark build & \\
+		Hadoop & 2.7 \\
+		Swagger codegen & 2.3.1   \\
+		Node JS & 9.11 \\
+		Docker & CE 18.03  \\
+		Docker Compose & 1.8.0  \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \section{Project Procedure}
 
@@ -221,6 +258,7 @@ environments. Further explanation on each of the environments will be given
 below.
 
 \subsubsection{Local Environment}
+\label{subsubsec:localenv}
 
 Figure~\ref{fig:localarchitecture} shows the Big Data reference architecture 
 built in the local environment having the following hardware specification.
@@ -265,6 +303,7 @@ and the local file system. The executor worker is responsible for executing
 K-means using Spark.
 
 \subsubsection{Distributed Cloud Environment}
+\label{subsubsec:distributedcloud}
 
 Figure~\ref{fig:distributedec2architecture} shows the Big Data reference 
 architecture built in the Amazon EC2 cluster with the use of the following 
@@ -429,6 +468,130 @@ seen that the system produces accurate results.
 \end{figure}
 
 \section{Results}
+
+This section presents the time breakdown results obtained when executing the 
+system in local and cloud environments. The specification of the local and 
+cloud environments can be found in Section~\ref{subsubsec:localenv} 
+and~\ref{subsubsec:distributedcloud}.
+
+\subsection{Time Breakdown According to Task}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Task Time Breakdown}\label{tbl:tasktimebreakdown}
+	\begin{tabular}{*{3}{c}}
+		\toprule
+		Task                                     & Time in Local & Time in EC2 
+		\\
+		   & Environment (s) & Environment (s) \\
+		\midrule
+		Upload Input File  
+		&                               &                             \\
+		(Total)  
+		&                               &                             \\ 
+		\midrule
+		Upload Input File  
+		&                               &                             \\
+		(Request Reaching)  
+		&                               &                             \\
+		\midrule
+		Upload Input File    
+		&                               &                             \\
+		(Worker Processing)    
+		&                               &                             \\
+		\midrule
+		Executing K-means    
+		&                               &                             \\
+		(Total)    
+		&                               &                             \\
+		\midrule
+		Executing K-means    
+		&                               &                             \\
+		(Worker Processing)    
+		&                               &                             \\
+		\midrule
+		Retrieve Model        
+		&                               &                             \\
+		(Total)        
+		&                               &                             \\
+		\midrule
+		Retrieve Model      
+		&                               &                             \\
+		(Request Reaching)      
+		&                               &                             \\
+		\midrule
+		Retrieve Model       
+		&                               &                             \\
+		(Worker Processing)       
+		&                               &                             \\
+		\midrule
+		Retrieve Predictions  
+		&                               &                             \\
+		(Total)  
+		&                               &                             \\
+		\midrule
+		Retrieve Predictions  
+		&                               &                             \\
+		(Request Reaching)  
+		&                               &                             \\
+		\midrule
+		Retrieve Predictions
+		&                               &                             \\
+		(Worker Processing) 
+		&                               &                             \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+
+\subsection{Time Breakdown According to Number of Clusters}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Time Breakdown Based on Number of 
+	Clusters}\label{tbl:clustertimebreakdown}
+	\begin{tabular}{*{3}{c}}
+		\toprule
+		Number of & Total Time in Local & Total Time in EC2 \\
+		Clusters & Environment (s) & Environment (s) \\
+		\midrule
+		10  &          &         \\ \midrule
+		20  &          &         \\ \midrule
+		30  &          &         \\ \midrule
+		40  &          &         \\ \midrule
+		50  &          &         \\ \midrule
+		60  &          &         \\ \midrule
+		70  &          &         \\ \midrule
+		80  &          &         \\ \midrule
+		90  &          &         \\ \midrule
+		100 &          &         \\ \midrule
+		125 &          &         \\ \midrule
+		150  &          &         \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Time Breakdown for Different Data Sizes}
+
+\begin{table}[htbp]
+	\centering
+	\caption{Time Breakdown for Different Data 
+	Sizes}\label{tbl:datasizestimebreakdown}
+	\begin{tabular}{*{3}{c}}
+		\toprule
+		Data Size & Total Time in Local & Total Time in EC2 \\
+		& Environment (s) & Environment (s) \\
+		\midrule
+		10  &          &         \\ \midrule
+		20  &          &         \\ \midrule
+		30  &          &         \\ \midrule
+		40  &          &         \\ \midrule
+		50  &          &         \\ \midrule
+		60  &          &         \\ \midrule
+		70  &          &         \\
+		\bottomrule
+	\end{tabular}
+\end{table}
 
 \section{Conclusion}
 
