@@ -346,6 +346,23 @@ data.
 
 \subsubsection{Multi Docker Container Environment}
 
+Figure~\ref{fig:multicontainerdocker} shows the components of the Big Data 
+reference architecture in multiple docker containers. Each of the Hadoop, Node 
+JS server, K-means Swagger REST service, Redis server, Celery file storage 
+worker are in single containers while the Celery executor worker and Spark 
+installation are in a single container. With the help of Docker Compose we can 
+easily define the network through which each of the containers will 
+communicate with each other and easily mount the same file system for the file 
+storage worker and Node JS server. 
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/dockerarchitecture.jpg}
+	\caption{Multi-Container Docker Architecture}
+\label{fig:multicontainerdocker} 
+\end{figure}
+
+
 \subsection{Data Format}
 \label{sec:dataformat}
 
