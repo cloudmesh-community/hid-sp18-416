@@ -30,15 +30,15 @@
 
 
 \begin{abstract}
-Distributed Big Data reference architectures are of great importance. 
-With the use of Python Celery this project focuses on building such a 
-distributed Big Data reference architecture. The main goal of the project is 
-to identify the key requirements for the domain and build the components of 
-the system. K-means is a widely known clustering algorithm that is used 
-on a huge amount of data sets. Therefore, the use case for this project 
-is built around executing the K-means algorithm. The environment is also 
-built on three environments; local, distributed cloud and multi-container 
-Docker environments.
+Distributed Big Data reference architectures are of great importance and can 
+be built by various tools supporting distributed tasks. With the use of Python 
+Celery this project focuses on building such a distributed Big Data reference 
+architecture. The main goal of the project is to identify the key requirements 
+for the domain and build the components of the system. K-means is a widely 
+known clustering algorithm that is used on a huge amount of data sets. 
+Therefore, the use case for this project is built around executing the K-means 
+algorithm. The environment is also built on three environments; local, 
+distributed cloud and multi-container Docker environments.
 \end{abstract}
 
 \keywords{hid-sp18-416, Python Celery, Swagger REST services, Node JS, Spark, 
@@ -95,25 +95,6 @@ The project goals are listed as follows.
 	\item Provide a thorough guide on building distributed Big Data analysis 
 	environments.	
 \end{enumerate}
-
-\section{Project Procedure}
-
-This section focuses on providing guidance for building the distributed 
-reference architecture for big data problems. The first subsection which is on 
-building the environment is further divided into three sections each 
-explaining the specific environments used, procedures and problems faced in 
-that specific environment. The second subsection focuses on defining the 
-format of the data that needs to be given to the service.   
-
-\subsection{Building the Environment}
-
-\subsubsection{Local Environment}
-
-\subsubsection{Distributed Cloud Environment}
-
-\subsubsection{Multi Docker Container Environment}
-
-\subsection{Data Format}
 
 \section{Technology Usage}
 
@@ -222,9 +203,153 @@ Individual operations on each Docker image or container is irrelevant to
 Docker Compose and it only focuses on the orchestration of the environment as 
 a whole~\cite{hid-sp18-416-www-docker-compose-blog}. 
 
-\section{Results}
+\section{Project Procedure}
 
-\section{Performance Comparison}
+This section focuses on providing guidance for building the distributed 
+reference architecture for big data problems. The first subsection which is on 
+building the environment is further divided into three sections each 
+explaining the specific environments used, procedures and problems faced in 
+that specific environment. The second subsection focuses on defining the 
+format of the data that needs to be given to the service.   
+
+\subsection{Building the Environment}
+
+This subsection focuses on describing the architecture and functionality of 
+the system. The architecture is built on three different types of 
+environments; local, Amazon EC2 (cloud) and multi-container Docker 
+environments. Further explanation on each of the environments will be given 
+below.
+
+\subsubsection{Local Environment}
+
+Figure~\ref{fig:localarchitecture} shows the Big Data reference architecture 
+built in the local environment having the following hardware specification.
+
+\begin{description}
+	\item[Sony Vaio Laptop] 4 hardware cores, 2 threads per core, Intel Core 
+	i7-2670QM processor (up to 2.2 GHz) with 8 GB DDR4 RAM, 500 GB SSD hard 
+	drive and Nvidia GeForce GT 540M 1GB VGA.
+\end{description}
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/localarchitecture.jpg}
+	\caption{Local Architecture Environment}
+\label{fig:localarchitecture} 
+\end{figure}
+
+Following is the brief overview of the functionality and architecture 
+of the system. The Node JS server will be used to interact with the local file 
+system which will be used to store the input data, model and prediction data. 
+Following are the APIs exposed by the Node JS server.
+
+\begin{description}
+	\item[Save input file] Given the input data file in a specific format which 
+	will be discussed in~\ref{sec:dataformat} save the file in the local file 
+	system.
+	\item[Execute KMeans] Execute K-means for the given input data set.
+	\item[Get Kmeans Model] After executing K-means retrieve the model or 
+	cluster centers.
+	\item[Get Predictions] After executing K-means retrieve the predictions for 
+	each data point.
+\end{description}
+
+A curl client can be used to invoke the functionalities which are exposed by 
+the Node JS server. Next the Celery file storage and executor workers are both 
+listening to the Redis Server to which the Kmeans Swagger REST service 
+publishes messages after it is being invoked by the Node JS server. Both of 
+the workers each listen to a specific queue and once a request (for a specific 
+task) arrives in their queues they are listening to they execute the tasks. 
+The file storage worker is responsible for moving the files to and from HDFS 
+and the local file system. The executor worker is responsible for executing 
+K-means using Spark.
+
+\subsubsection{Distributed Cloud Environment}
+
+Figure~\ref{fig:distributedec2architecture} shows the Big Data reference 
+architecture built in the Amazon EC2 cluster with the use of the following 
+different EC2 node types.
+
+\begin{description}
+	\item[t2.small] 2 nodes for Node JS server and Hadoop installation
+	\item[t2.medium] 1 node for the installation of K-means Swagger REST 
+	service, celery workers, redis and spark installations
+\end{description}
+
+The hardware specification for each of the instance types is shown 
+below~\cite{hid-sp18-416-www-amazon-instance-types}.
+
+\begin{description}
+	\item[t2.micro node] 1 vCPU, Intel Xeon Family Processor (up to 3.3 GHz) 
+	with 1 GB RAM, Intel AVX and Intel Turbo support
+	\item[t2.medium node] 2 vCPU, Intel Xeon Family Processor (up to 3.3 GHz) 
+	with 4 GB RAM, Intel AVX and Intel Turbo support
+\end{description}
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/distributedec2architecture.jpg}
+	\caption{Distributed Architecture in EC2 Cluster}
+\label{fig:distributedec2architecture} 
+\end{figure}
+
+The following paragraphs will explain how the communication between 
+each of the components in the distributed architecture happens. It should be 
+noted that requests are represented in black arrows and responses are 
+displayed in red dashed arrows. The black dashed arrows represent that the 
+Celery workers listen to the Redis servers. It should also be noted that the 
+communication between from the Node JS server to the K-means Swagger REST 
+service and the communication between the K-means Swagger REST service and 
+Celery Workers are asynchronous.
+
+\paragraph{Save Input Data File}
+
+Figure~\ref{fig:uploadipfiledistributed} shows the order of request and 
+response flow within the distributed architecture. 
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/ec2uploadipfile.jpg}
+	\caption{Upload Input File Request/Response Flow in Distributed 
+	Architecture}
+\label{fig:uploadipfiledistributed} 
+\end{figure}
+
+\paragraph{Execute K-means Function}
+
+Figure~\ref{fig:executekmeansdistributed} shows the order of request and 
+response flow within the distributed architecture for executing the K-means 
+algorithm.
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/ec2executekmeans.jpg}
+	\caption{Execute K-means Function Request/Response Flow in Distributed 
+	Architecture}
+\label{fig:executekmeansdistributed} 
+\end{figure}
+
+\paragraph{Retrieve Model File}
+
+Figure~\ref{fig:retrievemodelfiledistributed} shows the order of request and 
+response flow within the distributed architecture for retrieving the K-means 
+model. The same flow can be seen when retrieving the predictions for the input 
+data.
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=\columnwidth]{images/ec2getkmeansmodel.jpg}
+	\caption{Retrieve Model File Request/Response Flow in Distributed 
+	Architecture}
+\label{fig:retrievemodelfiledistributed} 
+\end{figure}
+
+\subsubsection{Multi Docker Container Environment}
+
+\subsection{Data Format}
+\label{sec:dataformat}
+
+\section{Results}
 
 \section{Conclusion}
 
