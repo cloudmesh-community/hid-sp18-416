@@ -511,16 +511,16 @@ following tasks in the Big Data architecture.
 
 In each task the time taken for processing by each worker is also provided. 
 The time in Table~\ref{tbl:tasktimebreakdown} is provided for a dataset having 
-a size 100MB. The time breakdown provides insight about where most 
-of the time is used and how much of the time is actually used for processing 
-in the Celery workers. Uploading the input file consumes a significant amount 
-of time compared to the retrieval of the model and prediction files in the 
-distributed cloud environment. In terms of processing the K-means execution 
-takes a significant amount of time compared to the file transfer processing 
-regardless of the environment. The overhead in total time for the file 
-transfer functions is due to having to move large files from client to cloud 
-file system to HDFS nodes and vice versa and dependent on the file size and 
-network.
+a size 100MB~\cite{hid-sp18-416-www-iot-dataset}. The time breakdown provides 
+insight about where most of the time is used and how much of the time is 
+actually used for processing in the Celery workers. Uploading the input file 
+consumes a significant amount of time compared to the retrieval of the model 
+and prediction files in the distributed cloud environment. In terms of 
+processing the K-means execution takes a significant amount of time compared 
+to the file transfer processing regardless of the environment. The overhead in 
+total time for the file transfer functions is due to having to move large 
+files from client to cloud file system to HDFS nodes and vice versa and 
+dependent on the file size and network.
 
 \begin{table}[htbp]
 	\centering
