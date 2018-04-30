@@ -276,7 +276,7 @@ built in the local environment having the following hardware specification.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/localarchitecture.jpg}
+	\includegraphics[width=\columnwidth]{images/localarchitecture.pdf}
 	\caption{Local Architecture Environment}
 \label{fig:localarchitecture} 
 \end{figure}
@@ -332,7 +332,7 @@ below~\cite{hid-sp18-416-www-amazon-instance-types}.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/distributedec2architecture.jpg}
+	\includegraphics[width=\columnwidth]{images/distributedec2architecture.pdf}
 	\caption{Distributed Architecture in EC2 Cluster}
 \label{fig:distributedec2architecture} 
 \end{figure}
@@ -359,7 +359,7 @@ retrieves the file from the EFS and saves it in the HDFS node.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/ec2uploadipfile.jpg}
+	\includegraphics[width=\columnwidth]{images/ec2uploadipfile.pdf}
 	\caption{Upload Input File Request/Response Flow in Distributed 
 	Architecture}
 \label{fig:uploadipfiledistributed} 
@@ -378,7 +378,7 @@ written to the HDFS through the Celery file storage worker.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/ec2executekmeans.jpg}
+	\includegraphics[width=\columnwidth]{images/ec2executekmeans.pdf}
 	\caption{Execute K-means Function Request/Response Flow in Distributed 
 	Architecture}
 \label{fig:executekmeansdistributed} 
@@ -397,7 +397,7 @@ the input data.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/ec2getkmeansmodel.jpg}
+	\includegraphics[width=\columnwidth]{images/ec2getkmeansmodel.pdf}
 	\caption{Retrieve Model File Request/Response Flow in Distributed 
 	Architecture}
 \label{fig:retrievemodelfiledistributed} 
@@ -416,7 +416,7 @@ storage worker and Node JS server.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=\columnwidth]{images/dockerarchitecture.jpg}
+	\includegraphics[width=\columnwidth]{images/dockerarchitecture.pdf}
 	\caption{Multi-Container Docker Architecture}
 \label{fig:multicontainerdocker} 
 \end{figure}
@@ -457,7 +457,7 @@ Sepal\_Length and Sepal\_Width.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=0.8\columnwidth]{images/irisinputdata.png}
+	\includegraphics[width=0.8\columnwidth]{images/irisinputdata.pdf}
 	\caption{Iris Input Data Set Classification}
 \label{fig:irisinputdata} 
 \end{figure}
@@ -485,7 +485,7 @@ seen that the system produces accurate results.
 
 \begin{figure}[htbp] 
 	\centering
-	\includegraphics[width=0.8\columnwidth]{images/irispredictions.png}
+	\includegraphics[width=0.8\columnwidth]{images/irispredictions.pdf}
 	\caption{Predictions for Iris Data Set}
 \label{fig:irispredictions} 
 \end{figure}
@@ -635,14 +635,14 @@ system.
 \section{Conclusion}
 
 This project aims in building a Big Data reference architecture using Python 
-Celery which is based on distributed message passing and REST service using 
+Celery which is based on distributed message passing and REST services using 
 Node JS and Swagger Codegen. A wide variety of tools have been used when 
 building the reference architecture, in which most of them facilitate building 
 the distributed nature for the architecture. The Celery workers are the key 
 components of the system which execute tasks by listening to task requests 
 which arrive in specific queues. The Celery workers provide modularization to 
 the distributed environment. This project focuses on building the 
-architecture for executing the K-means function and from the taks breakdown 
+architecture for executing the K-means function and from the task breakdown 
 analysis it is evident that when working with the Amazon Cloud environment 
 most of the time is consumed for file transfer through the network. Due to 
 connection time out issues with the EC2 environment it is also evident that 
@@ -652,7 +652,7 @@ Celery workers takes minimal processing time for its tasks, therefore the
 architecture can be improved further by considering alternative components 
 keeping the celery workers and the Swagger REST service component intact.
  
-\section{Future Work}
+\section{Limitations and Improvement Suggestions}
 
 Further analysis on the network requirements and alternatives to uploading 
 larger input files to an FTP server can be investigated. Extensions to this 
