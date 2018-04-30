@@ -631,6 +631,17 @@ system.
 		\bottomrule
 	\end{tabular}
 \end{table}
+ 
+\section{Limitations and Improvement Suggestions}
+
+Further analysis on the network requirements and alternatives to uploading 
+larger input files to an FTP server can be investigated. Extensions to this 
+project can be made by adding new Celery Workers with tasks or by adding 
+the new tasks to existing Celery workers based on relevance. The newly added 
+tasks need to be exposed via a REST service which can be invoked directly or 
+via the Node JS server. Further improvement on the architecture can also be 
+made to include an util worker or module and a MongoDB database to keep track 
+of the progress of long running Celery tasks.
 
 \section{Conclusion}
 
@@ -651,17 +662,6 @@ needed to make the architecture more robust. It is evident that the Python
 Celery workers takes minimal processing time for its tasks, therefore the 
 architecture can be improved further by considering alternative components 
 keeping the celery workers and the Swagger REST service component intact.
- 
-\section{Limitations and Improvement Suggestions}
-
-Further analysis on the network requirements and alternatives to uploading 
-larger input files to an FTP server can be investigated. Extensions to this 
-project can be made by adding new Celery Workers with tasks or by adding 
-the new tasks to existing Celery workers based on relevance. The newly added 
-tasks need to be exposed via a REST service which can be invoked directly or 
-via the Node JS server. Further improvement on the architecture can also be 
-made to include an util worker or module and a MongoDB database to keep track 
-of the progress of long running Celery tasks.
 
 \begin{acks}
 
