@@ -34,3 +34,5 @@ Make sure to follow the order specified below.
    - ```make docker_compose_clean```
 
 If you would like to change the input data file, username or job number given to the service (which are given as parameters to the CURL command please modify the Makefile). Also make sure that the input data file is in the current directory.
+
+You can find the demo for executing the project code at https://drive.google.com/file/d/1owAHwYkTwJ6zPE50nqQpyPoW4YJMlvRW/view?usp=sharing.
